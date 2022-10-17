@@ -125,7 +125,7 @@ resource "azurerm_linux_virtual_machine" "mtc-vm" {
   }
 
   provisioner "local-exec" {
-    command = templatefile("linux-ssh-script.tpl", {
+    command = templatefile("${var.host_os}-ssh-script.tpl", {
       hostname     = self.public_ip_address
       user         = "adminuser"
       identityfile = "/Users/swapnilhedau/.ssh/mtcazurekey"
@@ -144,7 +144,7 @@ data "azurerm_public_ip" "mtc-ip-data" {
 }
 
 output "vm_name_ip" {
-  value       = "${azurerm_linux_virtual_machine.mtc-vm.name} - ${data.azurerm_public_ip.mtc-ip-data.ip_address}"
+  value = "${azurerm_linux_virtual_machine.mtc-vm.name} - ${data.azurerm_public_ip.mtc-ip-data.ip_address}"
 }
 
 
