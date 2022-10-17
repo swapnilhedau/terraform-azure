@@ -143,3 +143,8 @@ data "azurerm_public_ip" "mtc-ip-data" {
   resource_group_name = azurerm_resource_group.mtc-rg.name
 }
 
+output "vm_name_ip" {
+  value       = "${azurerm_linux_virtual_machine.mtc-vm.name} - ${data.azurerm_public_ip.mtc-ip-data.ip_address}"
+}
+
+
